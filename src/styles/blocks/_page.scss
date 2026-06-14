@@ -1,0 +1,103 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $font-family;
+  color: $color-text;
+  background: $color-bg;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page {
+  min-height: 100vh;
+}
+
+.page__header {
+  padding: 24px 16px 0;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.page__title {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.page__subtitle {
+  margin-top: 8px;
+  color: $color-text-muted;
+}
+
+.page__mobile-filters {
+  padding: 16px 16px 0;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  @include tablet-up {
+    display: none;
+  }
+}
+
+.page__body {
+  display: grid;
+  gap: 24px;
+  padding: 16px 16px 96px;
+  max-width: 1280px;
+  margin: 0 auto;
+
+  @include tablet-up {
+    padding: 24px 16px 40px;
+    grid-template-columns: 300px 1fr;
+    align-items: start;
+  }
+}
+
+.page__sidebar {
+  position: sticky;
+  top: 16px;
+
+  @include mobile-only {
+    display: none;
+  }
+}
+
+.page__content {
+  min-width: 0;
+}
