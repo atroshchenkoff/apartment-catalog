@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { ApartmentList } from './components/apartment-list/ApartmentList';
+import { ApartmentModal } from './components/apartment-modal/ApartmentModal';
 import { Filters } from './components/filters/Filters';
 import { useApartments } from './hooks/useApartments';
 import type { Apartment } from './types/apartment';
@@ -14,9 +16,22 @@ function App() {
     updateFilters,
     resetFilters,
   } = useApartments();
+  const [selectedApartment, setSelectedApartment] = useState<Apartment | null>(null);
+  const [modalOpen, setModalOpen] = useState(false);
 
-  const handleCardClick = (_apartment: Apartment) => {
-    // Modal will be added in the next iteration.
+  const handleCardClick = (apartment: Apartment) => {
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+    setSelectedApartment(apartment);
+    setModalOpen(true);
+  };
+
+  const handleModalOpenChange = (open: boolean) => {
+    setModalOpen(open);
+    if (!open) {
+      setSelectedApartment(null);
+    }
   };
 
   return (
@@ -42,6 +57,12 @@ function App() {
           />
         </main>
       </div>
+
+      <ApartmentModal
+        apartment={selectedApartment}
+        open={modalOpen}
+        onOpenChange={handleModalOpenChange}
+      />
     </div>
   );
 }
