@@ -2,6 +2,14 @@
 
 React-приложение для фильтрации квартир с имитацией бэкенда через MSW. Позволяет отфильтровать список по комнатам, площади, этажу, типу планировки и статусу сдачи, а также открыть детальную карточку в анимированном попапе.
 
+## Демо
+
+[apartment-catalog-neon.vercel.app](https://apartment-catalog-neon.vercel.app)
+
+## Репозиторий
+
+[github.com/atroshchenkoff/apartment-catalog](https://github.com/atroshchenkoff/apartment-catalog)
+
 ## Стек
 
 - Vite + React + TypeScript
@@ -18,29 +26,25 @@ npm run dev
 
 Приложение откроется на `http://localhost:5173`.
 
-## Сборка и деплой
+## Сборка
 
 ```bash
 npm run build
 npm run preview
 ```
 
-Бэкенда нет — API имитируется MSW (service worker) и в dev, и в production-сборке. После `npm run build` приложение работает на статическом хостинге (Vercel, Netlify и т.д.) без отдельного сервера.
+Бэкенда нет — API имитируется MSW (service worker) в dev и production.
 
 ## Тесты
 
-Проект использует [Vitest](https://vitest.dev/) — он встроен в Vite и не требует отдельного конфига сборщика.
+Проект использует [Vitest](https://vitest.dev/) с настройкой в `vite.config.ts`.
 
 ```bash
-npm test          # один прогон
+npm test            # один прогон
 npm run test:watch  # watch-режим
 ```
 
 Покрыты фильтрация квартир, сборка query-параметров, теги фильтров, запрос к API (MSW) и компонент `FilterTags`.
-
-## Изображения
-
-Карточки и модалка используют WebP-файлы из `public/images/apartments/`.
 
 ## API (мок)
 
@@ -63,5 +67,7 @@ src/
 ├── hooks/         # React-хуки
 ├── mocks/         # MSW handlers и мок-данные
 ├── styles/        # BEM-стили (SCSS)
-└── types/         # TypeScript-типы
+├── test/          # setup Vitest и MSW для тестов
+├── types/         # TypeScript-типы
+└── utils/         # фильтрация, query-параметры, форматирование
 ```
